@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Utils {
     
     public static int getRandomNumber(int num){

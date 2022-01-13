@@ -2,6 +2,8 @@
 
 class MafiaCity {
 
+    
+
     public MafiaCity(){
         
 

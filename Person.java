@@ -8,6 +8,13 @@ public class Person {
     private int personId;
     private int behaviour;
 
+    /**
+     * Constructor for all kinds of people
+     * @param names
+     * @param lastItalianName
+     * @param lastNonItalianName
+     * @param personIds
+     */
     public Person(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<String> lastNonItalianName, ArrayList<Integer> personIds){
 
         this.name = names.get(Utils.getRandomNumber(names.size()));
@@ -38,6 +45,34 @@ public class Person {
 
         this.behaviour = Utils.getRandomNumber(100);
 
+    }
+
+    /**
+     * Constructor for italian people
+     * @param names
+     * @param lastItalianName
+     * @param personIds
+     */
+    public Person(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
+
+        this.name = names.get(Utils.getRandomNumber(names.size()));
+        this.lineage = true;
+
+        int size = lastItalianName.size();
+        int index = Utils.getRandomNumber(size);
+        this.family = lastItalianName.get(index);
+
+        while(personId == 0){
+            int newId = Utils.getRandomNumber(999999);
+
+            if(!personIds.contains(newId)){
+                this.personId = newId;
+                personIds.add(newId);
+            }
+
+        }
+
+        this.behaviour = Utils.getRandomNumber(100);
     }
 
     public String toString(){

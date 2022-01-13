@@ -8,8 +8,8 @@ public class Gangster extends Person {
     private int strategist;
     private int carism;
 
-    public Gangster(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<String> lastNonItalianName, ArrayList<Integer> personIds){
-        super(names, lastItalianName, lastNonItalianName, personIds);
+    public Gangster(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
+        super(names, lastItalianName, personIds);
     }
     
     //Getters && Setters
