@@ -5,59 +5,46 @@ import java.util.ArrayList;
 
 public class Metadata {
 
-    private ArrayList<String> fileNames;
-    private ArrayList<String> fileNonItalianLastNames;
-    private ArrayList<String> fileItalianLastNames;
+    private static ArrayList<String> fileNames;
+    private static ArrayList<String> fileNonItalianLastNames;
+    private static ArrayList<String> fileItalianLastNames;
 
-
-    public Metadata(){
-        fileNames = new ArrayList<String>();
-        downloadNames();
+    public static void loadData(){
+        fileNames = downloadData("names.txt");
+        fileNonItalianLastNames = downloadData("italian.txt");
+        fileItalianLastNames = downloadData("nonitalian.txt");
     }
 
-    public void downloadNames(){
+    public static ArrayList<String> downloadData(String url){
+        ArrayList<String> upload = new ArrayList<String>();
+
         try{
-            File file = new File("database/names.txt");
+            File file = new File("database/" + url);
             Scanner sc = new Scanner(file);
             while(sc.hasNextLine()){
                 String data = sc.nextLine();
-                fileNames.add(data);
+                upload.add(data);
             }
             sc.close();
+            
         }catch(FileNotFoundException e){
             System.out.println("An error occurred.");
             e.printStackTrace();;
         }
+
+        return upload;
+
     }
 
-    public void downloadLastNames(){
-        try{
-            File file = new File("database/nonitalian.txt");
-            Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()){
-                String data = sc.nextLine();
-                fileNonItalianLastNames.add(data);
-            }
-            sc.close();
-        }catch(FileNotFoundException e){
-            System.out.println("An error occurred.");
-            e.printStackTrace();;
-        }
+    public static ArrayList<String> getFileNames(){
+        return fileNames;
     }
 
-    public void downloadItalianLastNames(){
-        try{
-            File file = new File("database/italian.txt");
-            Scanner sc = new Scanner(file);
-            while(sc.hasNextLine()){
-                String data = sc.nextLine();
-                fileItalianLastNames.add(data);
-            }
-            sc.close();
-        }catch(FileNotFoundException e){
-            System.out.println("An error occurred.");
-            e.printStackTrace();;
-        }
+    public static ArrayList<String> getFileNonItalianLastNames(){
+        return fileNonItalianLastNames;
     }
 
+    public static ArrayList<String> getFileItalianLastNames(){
+        return fileItalianLastNames;
+    }
 }

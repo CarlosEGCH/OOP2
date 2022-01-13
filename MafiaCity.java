@@ -9,10 +9,19 @@ class MafiaCity {
 
     }
     public static void main(String[] args) {
-        Metadata metadata = new Metadata();
+        Metadata.loadData();
+
+        Person person = new Person();
+
+        person.toString();
+
     }
 
     public static boolean personIdExists(int id){
         return personIds.contains(id);
+    }
+
+    public static ArrayList<Integer> getPersonIds(){
+        return personIds;
     }
 }
