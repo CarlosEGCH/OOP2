@@ -8,34 +8,30 @@ public class Person {
     private int personId;
     private int behaviour;
 
-    public Person(){
+    public Person(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<String> lastNonItalianName, ArrayList<Integer> personIds){
 
-        this.name = Metadata.getFileNames().get(Utils.getRandomNumber(Metadata.getFileNames().size()));
+        this.name = names.get(Utils.getRandomNumber(names.size()));
 
         if(Utils.getRandomNumber(10) > 5){
             this.lineage = true;
 
-            int size = Metadata.getFileItalianLastNames().size();
+            int size = lastItalianName.size();
             int index = Utils.getRandomNumber(size);
-            this.family = Metadata.getFileItalianLastNames().get(index);
+            this.family = lastItalianName.get(index);
         }else{
             this.lineage = false;
 
-            int size = Metadata.getFileNonItalianLastNames().size();
+            int size = lastNonItalianName.size();
             int index = Utils.getRandomNumber(size);
-            this.family = Metadata.getFileNonItalianLastNames().get(index);
+            this.family = lastNonItalianName.get(index);
         }
 
         while(personId == 0){
-            int newId = Utils.getRandomNumber(999999999);
+            int newId = Utils.getRandomNumber(999999);
 
-            if(MafiaCity.getPersonIds() == null){
+            if(!personIds.contains(newId)){
                 this.personId = newId;
-                MafiaCity.getPersonIds().add(newId);
-            }
-            if(!MafiaCity.personIdExists(newId)){
-                this.personId = newId;
-                MafiaCity.getPersonIds().add(newId);
+                personIds.add(newId);
             }
 
         }
@@ -46,7 +42,7 @@ public class Person {
 
     public String toString(){
         String info;
-        info = "Name: " + name + " ccId: " + personId + " Lineage: " + lineage + " Behaviour: " + behaviour + " Family: " + family;
+        info = "Name: " + this.name + " ccId: " + this.personId + " Lineage: " + this.lineage + " Behaviour: " + this.behaviour + " Family: " + this.family;
         return info;
     }
 

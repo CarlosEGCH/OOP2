@@ -5,27 +5,34 @@ import java.util.ArrayList;
 
 public class Metadata {
 
-    private static ArrayList<String> fileNames;
-    private static ArrayList<String> fileNonItalianLastNames;
-    private static ArrayList<String> fileItalianLastNames;
+    private ArrayList<String> fileNames;
+    private ArrayList<String> fileNonItalianLastNames;
+    private ArrayList<String> fileItalianLastNames;
+    private ArrayList<Integer> personIds;
 
-    public static void loadData(){
-        fileNames = downloadData("names.txt");
-        fileNonItalianLastNames = downloadData("italian.txt");
-        fileItalianLastNames = downloadData("nonitalian.txt");
+    public Metadata(){
+        loadData();
     }
 
-    public static ArrayList<String> downloadData(String url){
-        ArrayList<String> upload = new ArrayList<String>();
+    public void loadData(){
+        personIds = new ArrayList<Integer>();
+        fileNames = downloadData("database/names.txt");
+        fileNonItalianLastNames = downloadData("database/nonitalian.txt");
+        fileItalianLastNames = downloadData("database/italian.txt");
+    }
 
+    public ArrayList<String> downloadData(String url){
+        ArrayList<String> upload = new ArrayList<String>();
+        
         try{
-            File file = new File("database/" + url);
+            File file = new File(url);
             Scanner sc = new Scanner(file);
             while(sc.hasNextLine()){
                 String data = sc.nextLine();
                 upload.add(data);
             }
             sc.close();
+
             
         }catch(FileNotFoundException e){
             System.out.println("An error occurred.");
@@ -36,15 +43,19 @@ public class Metadata {
 
     }
 
-    public static ArrayList<String> getFileNames(){
+    public ArrayList<String> getFileNames(){
         return fileNames;
     }
 
-    public static ArrayList<String> getFileNonItalianLastNames(){
+    public ArrayList<String> getFileNonItalianLastNames(){
         return fileNonItalianLastNames;
     }
 
-    public static ArrayList<String> getFileItalianLastNames(){
+    public ArrayList<String> getFileItalianLastNames(){
         return fileItalianLastNames;
+    }
+
+    public ArrayList<Integer> getPersonIds(){
+        return personIds;
     }
 }
