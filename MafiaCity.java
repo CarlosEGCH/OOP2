@@ -36,7 +36,7 @@ class MafiaCity {
      * Display the program's menu
      */
     public static void displayMenu(){
-        menu = new Menu();
+        menu = new Menu(citizens, families, jail);
         menu.displayFamiliesMenu(families);
     }
 
@@ -57,13 +57,6 @@ class MafiaCity {
         return citizens;
     }
 
-    public static void familyProcess(){
-        int index = families.size() - 1;
-        while(index >= 0){
-            int caporegimes = families.get(index).getCaporegimesAmt() - 1;
-            families.get(index).getBoss().recruitSoldiers(citizens, families.get(index).getCaporegime(Utils.getRandomNumber(caporegimes)).getSoldiers());;
-        }
-    }
     public static void main(String[] args) {
         createMafiaCity();
         displayMenu();

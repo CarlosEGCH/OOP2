@@ -116,6 +116,22 @@ public class Person {
 
     }
 
+    public Caporegime becomeCaporegime(ArrayList<Person> citizens){
+        ArrayList<String> name = new ArrayList<String>();
+        ArrayList<String> lastName = new ArrayList<String>(); 
+        ArrayList<Integer> id = new ArrayList<Integer>();
+
+        name.add(this.name);
+        lastName.add(this.family);
+        id.add(this.personId);
+
+        Caporegime newCaporegime = new Caporegime(name, lastName, id);
+
+        citizens.remove(this);
+
+        return newCaporegime;
+    }
+
     public boolean getLineage(){
         return this.lineage;
     }
@@ -128,18 +144,26 @@ public class Person {
         return this.name;
     }
 
-    public void recruitSoldiers(ArrayList<Person> citizens, ArrayList<Soldier> soldiers){
+    public void recruitSoldiers(ArrayList<Person> citizens, Family family){
         int index = citizens.size() - 1;
-        int addedSoldiers = 0;
 
         while(index-- > 0){
-            if(addedSoldiers >= 3){
-                return;
-            }
             if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
-                soldiers.add(citizens.get(index).becomeSoldier(citizens));
-                addedSoldiers++;
+                family.getCaporegime(Utils.getRandomNumber(family.getCaporegimesAmt() - 1)).getSoldiers().add(citizens.get(index).becomeSoldier(citizens));
+                return;
             }
         }
     }
+
+    public void recruitCaporegimes(ArrayList<Person> citizens, Family family){
+        int index = citizens.size() - 1;
+
+        while(index-- > 0){
+            if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
+                family.getCaporegimes().add(citizens.get(index).becomeCaporegime(citizens));
+                return;
+            }
+        }
+    }
+    
 }
