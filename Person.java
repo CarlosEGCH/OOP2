@@ -7,6 +7,11 @@ public class Person {
     private boolean lineage;
     private int personId;
     private int behaviour;
+    private int loyalty;
+    private int muscle;
+    private int intelligence;
+    private int strategist;
+    private int charism;
 
     /**
      * Constructor for all kinds of people
@@ -22,13 +27,13 @@ public class Person {
         if(Utils.getRandomNumber(10) > 5){
             this.lineage = true;
 
-            int size = lastItalianName.size();
+            int size = lastItalianName.size() - 1;
             int index = Utils.getRandomNumber(size);
             this.family = lastItalianName.get(index);
         }else{
             this.lineage = false;
 
-            int size = lastNonItalianName.size();
+            int size = lastNonItalianName.size() - 1;
             int index = Utils.getRandomNumber(size);
             this.family = lastNonItalianName.get(index);
         }
@@ -44,6 +49,11 @@ public class Person {
         }
 
         this.behaviour = Utils.getRandomNumber(100);
+        this.loyalty = Utils.getRandomNumber(100);
+        this.muscle = Utils.getRandomNumber(100);
+        this.intelligence = Utils.getRandomNumber(100);
+        this.strategist = Utils.getRandomNumber(100);
+        this.charism = Utils.getRandomNumber(100);
 
     }
 
@@ -58,7 +68,7 @@ public class Person {
         this.name = names.get(Utils.getRandomNumber(names.size()));
         this.lineage = true;
 
-        int size = lastItalianName.size();
+        int size = lastItalianName.size() - 1;
         int index = Utils.getRandomNumber(size);
         this.family = lastItalianName.get(index);
 
@@ -73,11 +83,17 @@ public class Person {
         }
 
         this.behaviour = Utils.getRandomNumber(100);
+        this.loyalty = Utils.getRandomNumber(100);
+        this.muscle = Utils.getRandomNumber(100);
+        this.intelligence = Utils.getRandomNumber(100);
+        this.strategist = Utils.getRandomNumber(100);
+        this.charism = Utils.getRandomNumber(100);
     }
 
-    public String toString(){
+    public String stringify(){
         String info;
         info = "Name: " + this.name + " ccId: " + this.personId + " Lineage: " + this.lineage + " Behaviour: " + this.behaviour + " Family: " + this.family;
+        info += "\nLoyalty: " + this.loyalty + " Muscle: " + this.muscle + " Intelligence: " + this.intelligence + " Strategist: " + this.strategist + " Charism: " + this.charism + "\n";
         return info;
     }
 
