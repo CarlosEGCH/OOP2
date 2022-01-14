@@ -52,6 +52,10 @@ public class Family {
         return this.caporegimes.size();
     }
 
+    public ArrayList<Gangster> getUnderbosses(){
+        return this.underbosses;
+    }
+
     public String getFamilyName(){
         return this.boss.getName();
     }

@@ -128,10 +128,11 @@ public class Menu {
                 break;
             case 2:
                 family.getBoss().recruitCaporegimes(citizens, family);
-                System.out.println("\n\u001B[42m\u001B[30m successfully recruited\n\u001B[0m\u001B[0m");
+                System.out.println("\n\u001B[42m\u001B[30mCaporegime successfully recruited\n\u001B[0m\u001B[0m");
                 break;
             case 3:
-                //Recruit Underboss
+                family.getBoss().recruitUnderBosses(citizens, family);
+                System.out.println("\n\u001B[42m\u001B[30mUnderboss successfully recruited\n\u001B[0m\u001B[0m");
                 break;
             case 4:
                 //Generate business

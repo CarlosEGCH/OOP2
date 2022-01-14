@@ -132,6 +132,22 @@ public class Person {
         return newCaporegime;
     }
 
+    public Gangster becomeGangster(ArrayList<Person> citizens){
+        ArrayList<String> name = new ArrayList<String>();
+        ArrayList<String> lastName = new ArrayList<String>(); 
+        ArrayList<Integer> id = new ArrayList<Integer>();
+
+        name.add(this.name);
+        lastName.add(this.family);
+        id.add(this.personId);
+
+        Gangster newGangster = new Gangster(name, lastName, id);
+
+        citizens.remove(this);
+
+        return newGangster;
+    }
+
     public boolean getLineage(){
         return this.lineage;
     }
@@ -161,6 +177,17 @@ public class Person {
         while(index-- > 0){
             if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
                 family.getCaporegimes().add(citizens.get(index).becomeCaporegime(citizens));
+                return;
+            }
+        }
+    }
+
+    public void recruitUnderBosses(ArrayList<Person> citizens, Family family){
+        int index = citizens.size() - 1;
+
+        while(index-- > 0){
+            if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
+                family.getUnderbosses().add(citizens.get(index).becomeGangster(citizens));
                 return;
             }
         }
