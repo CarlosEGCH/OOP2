@@ -127,4 +127,19 @@ public class Person {
     public String getName(){
         return this.name;
     }
+
+    public void recruitSoldiers(ArrayList<Person> citizens, ArrayList<Soldier> soldiers){
+        int index = citizens.size() - 1;
+        int addedSoldiers = 0;
+
+        while(index-- > 0){
+            if(addedSoldiers >= 3){
+                return;
+            }
+            if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
+                soldiers.add(citizens.get(index).becomeSoldier(citizens));
+                addedSoldiers++;
+            }
+        }
+    }
 }

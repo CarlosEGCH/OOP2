@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Family {
     
-    private double wealth;
-    private Person boss;
-    private Person underboss;
+    //private double wealth;
+    private Gangster boss;
+    private Gangster underboss;
     private Person consiglieri;
     private ArrayList<Caporegime> caporegimes;
 
@@ -15,8 +15,8 @@ public class Family {
     public Family(Metadata metadata){
         this.caporegimes = new ArrayList<Caporegime>();
 
-        this.boss = new Person(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
-        this.underboss = new Person(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
+        this.boss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
+        this.underboss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
         this.consiglieri = new Consiglieri(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds());
 
         int index = Utils.getRandomNumber(2, 6);
@@ -51,5 +51,9 @@ public class Family {
 
     public boolean isFamily(String familyName){
         return (familyName.equals(this.getFamilyName()))? true : false; 
+    }
+
+    public Person getBoss(){
+        return this.boss;
     }
 }

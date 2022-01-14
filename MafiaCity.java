@@ -9,6 +9,10 @@ class MafiaCity {
     private static Metadata metadata;
     private static Menu menu;
 
+    
+    /**
+     * Create Families and population for the city
+     */
     public static void createMafiaCity(){
         citizens = new ArrayList<Person>();
         families = new ArrayList<Family>();
@@ -26,6 +30,12 @@ class MafiaCity {
             families.add(newFamily);
         }
 
+    }
+
+    /**
+     * Display the program's menu
+     */
+    public static void displayMenu(){
         menu = new Menu();
         menu.displayFamiliesMenu(families);
     }
@@ -51,13 +61,12 @@ class MafiaCity {
         int index = families.size() - 1;
         while(index >= 0){
             int caporegimes = families.get(index).getCaporegimesAmt() - 1;
-            families.get(index).getCaporegime(caporegimes--).recruitSoldiers(citizens);;
+            families.get(index).getBoss().recruitSoldiers(citizens, families.get(index).getCaporegime(Utils.getRandomNumber(caporegimes)).getSoldiers());;
         }
     }
     public static void main(String[] args) {
         createMafiaCity();
-
-
+        displayMenu();
     }
 
     

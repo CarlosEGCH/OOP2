@@ -54,8 +54,9 @@ public class Menu {
     }
 
     public void displayMenu(Family family){
-        int option = 0;
-        while(option != 5){
+        
+        while(true){
+            int option = 0;
             System.out.println("\u001B[36mMain Menu of the Family " + family.getFamilyName() + "\u001B[0m\n");
             System.out.println("1. Boss Menu\n");
             System.out.println("2. UnderBoss Menu\n");
@@ -81,7 +82,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("\n\u001B[31mGoing back\n\u001B[0m");
-                    break;
+                    return;
                 default:
                     System.out.println("\n\u001B[31mInvalid Option! Try again.\n\u001B[0m");
                     break;
