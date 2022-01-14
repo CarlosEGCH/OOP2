@@ -65,7 +65,7 @@ public class Person {
      */
     public Person(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
 
-        this.name = names.get(Utils.getRandomNumber(names.size()));
+        this.name = names.get(Utils.getRandomNumber(names.size() - 1));
         this.lineage = true;
 
         int size = lastItalianName.size() - 1;
@@ -90,11 +90,38 @@ public class Person {
         this.charism = Utils.getRandomNumber(100);
     }
 
+
+
     public String stringify(){
         String info;
         info = "Name: " + this.name + " ccId: " + this.personId + " Lineage: " + this.lineage + " Behaviour: " + this.behaviour + " Family: " + this.family;
         info += "\nLoyalty: " + this.loyalty + " Muscle: " + this.muscle + " Intelligence: " + this.intelligence + " Strategist: " + this.strategist + " Charism: " + this.charism + "\n";
         return info;
+    }
+
+    public Soldier becomeSoldier(ArrayList<Person> citizens){
+        ArrayList<String> name = new ArrayList<String>();
+        ArrayList<String> lastName = new ArrayList<String>(); 
+        ArrayList<Integer> id = new ArrayList<Integer>();
+
+        name.add(this.name);
+        lastName.add(this.family);
+        id.add(this.personId);
+
+        Soldier newSoldier = new Soldier(name, lastName, id);
+
+        citizens.remove(this);
+
+        return newSoldier;
+
+    }
+
+    public boolean getLineage(){
+        return this.lineage;
+    }
+
+    public int getLoyalty(){
+        return this.loyalty;
     }
 
 }

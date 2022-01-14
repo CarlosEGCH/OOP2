@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class MafiaCity {
 
@@ -34,11 +35,27 @@ class MafiaCity {
         System.out.println("\n\u001B[33m--------------------------- People ----------------------------\u001B[0m\n");
         citizens.forEach((c) -> System.out.println(c.stringify()));
     }
-    public static void main(String[] args) {
 
+    public static void processSoldiers(){
+        families.forEach((f) -> f.familyPhoto());
+    }
+
+    public static ArrayList<Person> getCitizens(){
+        return citizens;
+    }
+
+    public static void familyProcess(){
+        int index = families.size() - 1;
+        while(index >= 0){
+            int caporegimes = families.get(index).getCaporegimesAmt() - 1;
+            families.get(index).getCaporegime(caporegimes--).recruitSoldiers(citizens);;
+        }
+    }
+    public static void main(String[] args) {
         createMafiaCity();
-        showFamilies();
+
         showCitizens();
+
     }
 
     

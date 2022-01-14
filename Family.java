@@ -8,6 +8,10 @@ public class Family {
     private Person consiglieri;
     private ArrayList<Caporegime> caporegimes;
 
+    /**
+     * Constructor method
+     * @param metadata
+     */
     public Family(Metadata metadata){
         this.caporegimes = new ArrayList<Caporegime>();
 
@@ -31,5 +35,13 @@ public class Family {
     public void showCaporegimes(){
         System.out.println("\n\u001B[32m--------------------------- Caporegimes ----------------------------\u001B[0m\n");
         this.caporegimes.forEach((n) -> System.out.println(n.stringify()));
+    }
+
+    public Caporegime getCaporegime(int index){
+        return this.caporegimes.get(index);
+    }
+
+    public int getCaporegimesAmt(){
+        return this.caporegimes.size();
     }
 }
