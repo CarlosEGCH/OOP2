@@ -5,7 +5,9 @@ class MafiaCity {
 
     private static ArrayList<Person> citizens;
     private static ArrayList<Family> families;
+    private static ArrayList<Person> jail;
     private static Metadata metadata;
+    private static Menu menu;
 
     public static void createMafiaCity(){
         citizens = new ArrayList<Person>();
@@ -24,7 +26,8 @@ class MafiaCity {
             families.add(newFamily);
         }
 
-
+        menu = new Menu();
+        menu.displayFamiliesMenu(families);
     }
 
     public static void showFamilies(){
@@ -54,7 +57,6 @@ class MafiaCity {
     public static void main(String[] args) {
         createMafiaCity();
 
-        showCitizens();
 
     }
 

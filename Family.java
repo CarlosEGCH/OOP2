@@ -44,4 +44,12 @@ public class Family {
     public int getCaporegimesAmt(){
         return this.caporegimes.size();
     }
+
+    public String getFamilyName(){
+        return this.boss.getName();
+    }
+
+    public boolean isFamily(String familyName){
+        return (familyName.equals(this.getFamilyName()))? true : false; 
+    }
 }

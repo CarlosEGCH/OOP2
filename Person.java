@@ -73,7 +73,7 @@ public class Person {
         this.family = lastItalianName.get(index);
 
         while(personId == 0){
-            int newId = Utils.getRandomNumber(999999);
+            int newId = Utils.getRandomNumber(10000000, 99999999);
 
             if(!personIds.contains(newId)){
                 this.personId = newId;
@@ -124,4 +124,7 @@ public class Person {
         return this.loyalty;
     }
 
+    public String getName(){
+        return this.name;
+    }
 }
