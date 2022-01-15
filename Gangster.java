@@ -54,7 +54,7 @@ public class Gangster extends Person {
     }
     
     @Override
-    public String toString(){
+    public String stringify(){
         String info = super.toString();
         info += " Loyalty: " + loyalty + " Muscle: " + muscle + " Intelligence: " + intelligence + " Strategist: " + strategist + " Carism: " + carism;
         return info;

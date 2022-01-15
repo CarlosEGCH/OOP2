@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class Caporegime extends Gangster{
     private ArrayList<Soldier> soldiers;
-    //private double wealth;
-
 
     public Caporegime(ArrayList<String> names, ArrayList<String> lastItalianName,  ArrayList<Integer> personIds){
         super(names, lastItalianName, personIds);
