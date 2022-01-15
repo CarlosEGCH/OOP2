@@ -6,7 +6,7 @@ public class Gangster extends Person {
     private int muscle;
     private int intelligence;
     private int strategist;
-    private int carism;
+    private int charism;
 
     public Gangster(ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
         super(names, lastItalianName, personIds);
@@ -45,18 +45,17 @@ public class Gangster extends Person {
         this.strategist = strategist;
     }
     
-    public int getCarism() {
-        return carism;
+    public int getCharism() {
+        return charism;
     }
     
-    public void setCarism(int carism) {
-        this.carism = carism;
+    public void setCharism(int charism) {
+        this.charism = charism;
     }
     
     @Override
     public String stringify(){
-        String info = super.toString();
-        info += " Loyalty: " + loyalty + " Muscle: " + muscle + " Intelligence: " + intelligence + " Strategist: " + strategist + " Carism: " + carism;
+        String info = super.stringify();
         return info;
     }
 }

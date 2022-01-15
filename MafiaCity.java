@@ -5,6 +5,7 @@ class MafiaCity {
 
     private static ArrayList<Person> citizens;
     private static ArrayList<Family> families;
+    private static ArrayList<Business> businesses;
     private static ArrayList<Person> jail;
     private static Metadata metadata;
     private static Menu menu;
@@ -16,6 +17,7 @@ class MafiaCity {
     public static void createMafiaCity(){
         citizens = new ArrayList<Person>();
         families = new ArrayList<Family>();
+        businesses = new ArrayList<Business>();
 
         metadata = new Metadata();
         int population = Utils.getRandomNumber(15, 30);
@@ -37,7 +39,7 @@ class MafiaCity {
      */
     public static void displayMenu(){
         menu = new Menu(citizens, families, jail);
-        menu.displayFamiliesMenu(families);
+        menu.displayFamiliesMenu(families, businesses);
     }
 
     public static void showFamilies(){
@@ -57,8 +59,19 @@ class MafiaCity {
         return citizens;
     }
 
+    public static void generateBusinesses(){
+        ArrayList<Business> newBusinesses = new ArrayList<Business>();
+
+        newBusinesses.add(new Business(200, "Stealing", "intelligence"));
+        newBusinesses.add(new Business(450, "Extortion", "charism"));
+        newBusinesses.add(new Business(300, "Black Market", "strategist"));
+
+        businesses = newBusinesses;
+    }
+
     public static void main(String[] args) {
         createMafiaCity();
+        generateBusinesses();
         displayMenu();
     }
 

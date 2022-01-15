@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Family {
     
-    //private double wealth;
     private Gangster boss;
     private ArrayList<Gangster> underbosses;
     private Person consiglieri;
     private ArrayList<Caporegime> caporegimes;
+    private int wealth;
 
     /**
      * Constructor method
@@ -44,6 +44,10 @@ public class Family {
         this.underbosses.forEach((n) -> System.out.println(n.stringify()));
     }
 
+    public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
+        caporegime.getBusinesses().add(business);
+    }
+
     public Caporegime getCaporegime(int index){
         return this.caporegimes.get(index);
     }
@@ -70,5 +74,13 @@ public class Family {
 
     public ArrayList<Caporegime> getCaporegimes(){
         return this.caporegimes;
+    }
+
+    public int getWealth(){
+        return this.wealth;
+    }
+
+    public void setWealth(int wealth){
+        this.wealth = wealth;
     }
 }

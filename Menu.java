@@ -16,7 +16,7 @@ public class Menu {
         this.jail = jail;
     } 
 
-    public void displayFamiliesMenu(ArrayList<Family> families){
+    public void displayFamiliesMenu(ArrayList<Family> families, ArrayList<Business> businesses){
 
         System.out.println("╔╦══╦═╦═╦╦═╦═╦╦╦╦═══╗\n║║║║╠═╣╩╬╬═╣╔╬╬╣╠╦╦╗║\n║║║║╠╝║╦╣╠╝║╚╣╠╗╔╣║║║\n║╚╩╩╩═╩╝╚╩═╩═╩╝╚═╬╗║║\n╚════════════════╩═╩╝");
 
@@ -40,7 +40,7 @@ public class Menu {
 
                 if(familyNames.contains(option) && family.isFamily(option)){
 
-                    displayMenu(family);
+                    displayMenu(family, businesses);
                     option = "";
                     break;
 
@@ -64,7 +64,7 @@ public class Menu {
 
     }
 
-    public void displayMenu(Family family){
+    public void displayMenu(Family family, ArrayList<Business> businesses){
         
         while(true){
             int option = 0;
@@ -81,7 +81,7 @@ public class Menu {
 
             switch(option){
                 case 1:
-                    displayBossMenu(family);
+                    displayBossMenu(family, businesses);
                     break;
                 case 2:
                     displayUnderBossMenu(family);
@@ -102,12 +102,12 @@ public class Menu {
             }
             }catch(Exception e){
                 System.out.println("You must insert a number ");
-                displayMenu(family);
+                displayMenu(family, businesses);
             }
         }
     }
 
-    public void displayBossMenu(Family family){
+    public void displayBossMenu(Family family, ArrayList<Business> businesses){
         System.out.println("\u001B[36mMain Menu of the Boss " + family.getFamilyName() + "\n\u001B[0m");
         System.out.println("1. Recruit Soldier\n");
         System.out.println("2. Recruit CapoRegime\n");
@@ -135,7 +135,12 @@ public class Menu {
                 System.out.println("\n\u001B[42m\u001B[30mUnderboss successfully recruited\n\u001B[0m\u001B[0m");
                 break;
             case 4:
-                //Generate business
+
+                int randomCapo = family.getCaporegimesAmt() - 1;
+                int randomBusiness = businesses.size() - 1;
+                family.generateBusinessesForCaporegime(family.getCaporegimes().get(Utils.getRandomNumber(randomCapo)), businesses.get(randomBusiness));
+                System.out.println("\n\u001B[42m\u001B[30mBusiness generated successfully for Caporegime\n\u001B[0m\u001B[0m");
+                businesses.get(randomBusiness).showBusinessName();
                 break;
             case 5:
                 //Nominate consiglieri
@@ -147,8 +152,8 @@ public class Menu {
                 break;
         }
         }catch(Exception e){
-            System.out.println("You must insert a number ");
-            displayBossMenu(family);
+            System.out.println("You must insert a number. ERROR CODE: " + e.getMessage());
+            displayBossMenu(family, businesses);
         }
 
     }
