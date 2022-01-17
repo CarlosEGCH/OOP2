@@ -44,6 +44,10 @@ public class Family {
         this.underbosses.forEach((n) -> System.out.println(n.stringify()));
     }
 
+    public void showBusinesses(){
+        System.out.println("\n\u001B[32m--------------------------- Businesses ----------------------------\u001B[0m\n");
+    }
+
     public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
         caporegime.getBusinesses().add(business);
     }

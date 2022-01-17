@@ -192,5 +192,9 @@ public class Person {
             }
         }
     }
+
+    public String getFamilyName(){
+        return this.family;
+    }
     
 }
