@@ -21,15 +21,15 @@ public class Business {
 
     public int gangsterExploreAll(Gangster gangster){
         if(this.skill == "loyalty"){
-            return gangster.getLoyalty()*baseProfit;
+            return (gangster.getLoyalty()/100 + 1)*baseProfit;
         }else if(this.skill == "muscle"){
-            return gangster.getMuscle()*baseProfit;
+            return (gangster.getMuscle()/100 + 1)*baseProfit;
         }else if(this.skill == "intelligence"){
-            return gangster.getIntelligence()*baseProfit;
+            return (gangster.getIntelligence()/100 + 1)*baseProfit;
         }else if(this.skill == "strategist"){
-            return gangster.getStrategist()*baseProfit;
+            return (gangster.getStrategist()/100 + 1)*baseProfit;
         }else if(this.skill == "charism"){
-            return gangster.getCharism()*baseProfit;
+            return (gangster.getCharism()/100 + 1)*baseProfit;
         }
         return 1;
     }

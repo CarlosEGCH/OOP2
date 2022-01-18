@@ -152,10 +152,6 @@ public class Person {
         return this.lineage;
     }
 
-    public int getLoyalty(){
-        return this.loyalty;
-    }
-
     public String getName(){
         return this.name;
     }
@@ -195,6 +191,48 @@ public class Person {
 
     public String getFamilyName(){
         return this.family;
+    }
+
+        
+    //Getters && Setters
+    public int getLoyalty() {
+        return this.loyalty;
+    }
+    
+    public void setLoyalty(int loyalty) {
+        this.loyalty = loyalty;
+    }
+    
+    public int getMuscle() {
+        return this.muscle;
+    }
+    
+    public void setMuscle(int muscle) {
+        this.muscle = muscle;
+    }
+    
+    public int getIntelligence() {
+        return this.intelligence;
+    }
+    
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+    
+    public int getStrategist() {
+        return this.strategist;
+    }
+    
+    public void setStrategist(int strategist) {
+        this.strategist = strategist;
+    }
+    
+    public int getCharism() {
+        return this.charism;
+    }
+    
+    public void setCharism(int charism) {
+        this.charism = charism;
     }
     
 }

@@ -4,7 +4,7 @@ public class Family {
     
     private Gangster boss;
     private ArrayList<Gangster> underbosses;
-    private Person consiglieri;
+    private ArrayList<Consiglieri> consiglieries;
     private ArrayList<Caporegime> caporegimes;
     private int wealth;
 
@@ -15,11 +15,13 @@ public class Family {
     public Family(Metadata metadata){
         this.caporegimes = new ArrayList<Caporegime>();
         this.underbosses = new ArrayList<Gangster>();
+        this.consiglieries = new ArrayList<Consiglieri>();
 
         this.boss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
         Gangster underboss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
         this.underbosses.add(underboss);
-        this.consiglieri = new Consiglieri(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds());
+        Consiglieri consiglieri = new Consiglieri(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds());
+        this.consiglieries.add(consiglieri);
 
         int index = Utils.getRandomNumber(2, 4);
         while(index-- > 0){
@@ -31,7 +33,7 @@ public class Family {
 
     public void familyPhoto(){
         System.out.println("\n\u001B[31m--------------------------- Family ---- Wealth: "+ getWealth() +" ----------------------------\u001B[0m\n");
-        System.out.println("Boss: " + boss.stringify() + "\nConsiglieri: " + consiglieri.stringify() + "\n");
+        System.out.println("Boss: " + boss.stringify() + "\n");
     }
 
     public void showCaporegimes(){
