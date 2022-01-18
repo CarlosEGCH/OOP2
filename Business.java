@@ -19,32 +19,17 @@ public class Business {
         }
     }
 
-    public int caporegimeExploreAll(Caporegime caporegime){
+    public int gangsterExploreAll(Gangster gangster){
         if(this.skill == "loyalty"){
-            return caporegime.getLoyalty()*baseProfit;
+            return gangster.getLoyalty()*baseProfit;
         }else if(this.skill == "muscle"){
-            return caporegime.getMuscle()*baseProfit;
+            return gangster.getMuscle()*baseProfit;
         }else if(this.skill == "intelligence"){
-            return caporegime.getIntelligence()*baseProfit;
+            return gangster.getIntelligence()*baseProfit;
         }else if(this.skill == "strategist"){
-            return caporegime.getStrategist()*baseProfit;
+            return gangster.getStrategist()*baseProfit;
         }else if(this.skill == "charism"){
-            return caporegime.getCharism()*baseProfit;
-        }
-        return 1;
-    }
-
-    public int soldierExploreAll(Soldier soldier){
-        if(this.skill == "loyalty"){
-            return soldier.getLoyalty()*baseProfit;
-        }else if(this.skill == "muscle"){
-            return soldier.getMuscle()*baseProfit;
-        }else if(this.skill == "intelligence"){
-            return soldier.getIntelligence()*baseProfit;
-        }else if(this.skill == "strategist"){
-            return soldier.getStrategist()*baseProfit;
-        }else if(this.skill == "charism"){
-            return soldier.getCharism()*baseProfit;
+            return gangster.getCharism()*baseProfit;
         }
         return 1;
     }

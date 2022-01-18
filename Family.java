@@ -30,7 +30,7 @@ public class Family {
     }
 
     public void familyPhoto(){
-        System.out.println("\n\u001B[31m--------------------------- Family ----------------------------\u001B[0m\n");
+        System.out.println("\n\u001B[31m--------------------------- Family ---- Wealth: "+ getWealth() +" ----------------------------\u001B[0m\n");
         System.out.println("Boss: " + boss.stringify() + "\nConsiglieri: " + consiglieri.stringify() + "\n");
     }
 

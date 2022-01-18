@@ -84,7 +84,7 @@ public class Menu {
                     displayBossMenu(family, businesses);
                     break;
                 case 2:
-                    displayUnderBossMenu(family);
+                    displayUnderBossMenu(family, businesses);
                     break;
                 case 3:
                     displayConsiglieriMenu(family);
@@ -158,7 +158,7 @@ public class Menu {
 
     }
 
-    public void displayUnderBossMenu(Family family){
+    public void displayUnderBossMenu(Family family, ArrayList<Business> businesses){
         System.out.println("\u001B[36mMain Menu of the UnderBoss " + family.getFamilyName() + "\n\u001B[0m");
         System.out.println("1. Free Gangster\n");
         System.out.println("2. Business Exploration\n");
@@ -175,7 +175,10 @@ public class Menu {
                 //Free Gangster
                 break;
             case 2:
-                //Business Exploration
+                for(Caporegime capo: family.getCaporegimes()){
+                    capo.exploration(family);
+                    System.out.println("\n\u001B[42m\u001B[30mBusiness explored successfully by Caporegime "+capo.getName() + " "+ capo.getFamilyName() +"\n\u001B[0m\u001B[0m");
+                }
                 break;
             case 3:
                 //Loyalty Test
@@ -188,7 +191,7 @@ public class Menu {
         }
         }catch(Exception e){
             System.out.println("You must insert a number ");
-            displayUnderBossMenu(family);
+            displayUnderBossMenu(family, businesses);
         }
 
     }

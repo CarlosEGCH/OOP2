@@ -16,12 +16,19 @@ public class Caporegime extends Gangster{
         this.soldiers.forEach((s) -> System.out.println(s.stringify()));
     }
 
-    public void exploration(Family family, Caporegime caporegime){
+    public void exploration(Family family){
+        if(this.getBusinesses().isEmpty()){
+            return;
+        }
         for(Business business: businesses){
-            family.setWealth(family.getWealth() +  business.caporegimeExploreAll(caporegime));
+            int wealth = family.getWealth();
+            family.setWealth(wealth +  business.gangsterExploreAll(this));
+            System.out.println("gangsterExploreAll(): "+business.gangsterExploreAll(this)+"\n");
             
             for(Soldier soldier: soldiers){
-                family.setWealth(family.getWealth() +  business.soldierExploreAll(soldier));
+            wealth = family.getWealth();
+                family.setWealth(wealth +  business.gangsterExploreAll(soldier));
+                System.out.println("Actual wealth: "+family.getWealth()+"\n");
             }
         }
     }
