@@ -4,18 +4,18 @@ public class Business {
     private int baseProfit;
     private String name;
     private String skill;
-    private ArrayList<Gangster> associates;
+    private ArrayList<Person> associates;
     private ArrayList<Caporegime> caporegimes;
 
-    public Business(int profit, String name, String skill, ArrayList<String> names, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
+    public Business(int profit, String name, String skill, ArrayList<String> names, ArrayList<String> lastNonItalianName, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
         this.baseProfit = profit;
         this.name = name;
         this.skill = skill;
-        this.associates = new ArrayList<Gangster>();
+        this.associates = new ArrayList<Person>();
 
         int amtOfAssociates = Utils.getRandomNumber(10);
         while(amtOfAssociates-- > 0){
-            this.associates.add(new Gangster(names, lastItalianName, personIds));
+            this.associates.add(new Person(names, lastItalianName, lastNonItalianName, personIds));
         }
     }
 
@@ -38,7 +38,7 @@ public class Business {
         System.out.println(this.name);
     }
 
-    public ArrayList<Gangster> getAssociates(){
+    public ArrayList<Person> getAssociates(){
         return this.associates;
     }
 
@@ -63,6 +63,15 @@ public class Business {
         System.out.println("\n\u001B[31m--------------------------- Associates ----------------------------\u001B[0m\n");
         this.associates.forEach((a)->System.out.println(a.stringify()));
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
     /*
     * TODO: Improve business exploration methods to make them more diverse.

@@ -135,15 +135,13 @@ public class Menu {
                 System.out.println("\n\u001B[42m\u001B[30mUnderboss successfully recruited\n\u001B[0m\u001B[0m");
                 break;
             case 4:
-
-                int randomCapo = family.getCaporegimesAmt() - 1;
-                int randomBusiness = businesses.size() - 1;
+                int randomCapo = Utils.getRandomNumber(family.getCaporegimesAmt() - 1);
+                int randomBusiness = Utils.getRandomNumber(businesses.size() - 1);
                 family.generateBusinessesForCaporegime(family.getCaporegimes().get(Utils.getRandomNumber(randomCapo)), businesses.get(randomBusiness));
-                System.out.println("\n\u001B[42m\u001B[30mBusiness generated successfully for Caporegime\n\u001B[0m\u001B[0m");
-                businesses.get(randomBusiness).showBusinessName();
+                System.out.println("\n\u001B[42m\u001B[30mBusiness "+ businesses.get(randomBusiness).getName() +" generated successfully for Caporegime\n\u001B[0m\u001B[0m");
                 break;
             case 5:
-                //Nominate consiglieri
+                family.nominateConsiglieri(citizens);
                 break;
             case 6:
                 return;
@@ -247,10 +245,11 @@ public class Menu {
             case 1:
                 family.familyPhoto();
                 family.showUnderBosses();
+                family.showConsiglieries();
                 family.showCaporegimes();
                 break;
             case 2:
-                //Business Plan
+                family.showBusinesses();
                 break;
             case 3:
                 //Costs Map

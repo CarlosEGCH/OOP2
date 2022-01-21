@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Family {
     
@@ -45,9 +46,57 @@ public class Family {
         System.out.println("\n\u001B[35m--------------------------- UnderBosses ----------------------------\u001B[0m\n");
         this.underbosses.forEach((n) -> System.out.println(n.stringify()));
     }
+    
+    public void showConsiglieries(){
+        System.out.println("\n\u001B[32m--------------------------- Consiglieries ----------------------------\u001B[0m\n");
+        for(Consiglieri c: getConsiglieries()){
+            System.out.println("\n"+c.stringify()+"\n");
+        }
+    }
 
     public void showBusinesses(){
-        System.out.println("\n\u001B[32m--------------------------- Businesses ----------------------------\u001B[0m\n");
+        for(Caporegime caporegime: caporegimes){
+        System.out.println("\n\u001B[32m--------------------------- Businesses for Caporegime "+ caporegime.getName() + " " + caporegime.getFamilyName() +"----------------------------\u001B[0m\n");
+            for(Business business: caporegime.getBusinesses()){
+            System.out.println("\n        "+business.getName()+"        \n");
+            System.out.println("\n\u001B[33m----------------------------Associates:-----------------------------------\u001B[0m\n");
+                for(Person associate: business.getAssociates()){
+                    System.out.println("\n"+associate.stringify()+"\n");
+                }
+            }
+
+        }
+    }
+
+    public void nominateConsiglieri(ArrayList<Person> citizens){
+        while(true){
+            showBusinesses();
+            System.out.println("\nChoose an associate (ccID) to nominate as Consiglieri, or type 0 to leave\n");
+
+            int option;
+            Scanner sc = new Scanner(System.in);
+            option = sc.nextInt();
+
+            for(Caporegime c: caporegimes){
+                for(Business b: c.getBusinesses()){
+                    for(Person a:b.getAssociates()){
+                        if(option == a.getPersonId()){
+                            this.getConsiglieries().add(a.becomeConsiglieri(citizens));
+                            System.out.println("\n\u001B[46m\u001B[30m"+a.getName() + " " + a.getFamilyName()+" was nominated as Consiglieri\u001B[30m\u001B[0m\n");
+                            b.getAssociates().remove(a);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            if(option == 0){
+                System.out.println("\nLeaving current menu\n");
+                break;
+            }
+
+            System.out.println("\n\u001B[41mInvalid input\u001B[0m\n");
+        }
     }
 
     public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
@@ -60,6 +109,10 @@ public class Family {
 
     public int getCaporegimesAmt(){
         return this.caporegimes.size();
+    }
+
+    public ArrayList<Consiglieri> getConsiglieries(){
+        return this.consiglieries;
     }
 
     public ArrayList<Gangster> getUnderbosses(){

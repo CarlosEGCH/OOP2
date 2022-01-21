@@ -132,6 +132,22 @@ public class Person {
         return newCaporegime;
     }
 
+    public Consiglieri becomeConsiglieri(ArrayList<Person> citizens){
+        ArrayList<String> name = new ArrayList<String>();
+        ArrayList<String> lastName = new ArrayList<String>(); 
+        ArrayList<Integer> id = new ArrayList<Integer>();
+
+        name.add(this.name);
+        lastName.add(this.family);
+        id.add(this.personId);
+
+        Consiglieri newConsiglieri = new Consiglieri(name, lastName, lastName, id);
+
+        citizens.remove(this);
+
+        return newConsiglieri;
+    }
+
     public Gangster becomeGangster(ArrayList<Person> citizens){
         ArrayList<String> name = new ArrayList<String>();
         ArrayList<String> lastName = new ArrayList<String>(); 
@@ -233,6 +249,14 @@ public class Person {
     
     public void setCharism(int charism) {
         this.charism = charism;
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
     
 }
