@@ -13,6 +13,8 @@ public class Person {
     private int strategist;
     private int charism;
 
+    private int cost;
+
     /**
      * Constructor for all kinds of people
      * @param names
@@ -54,6 +56,10 @@ public class Person {
         this.intelligence = Utils.getRandomNumber(100);
         this.strategist = Utils.getRandomNumber(100);
         this.charism = Utils.getRandomNumber(100);
+
+        if(this.behaviour <= 50){
+            this.cost = Utils.getRandomNumber(100,300);
+        }
 
     }
 

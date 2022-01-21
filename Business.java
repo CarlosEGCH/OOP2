@@ -6,6 +6,7 @@ public class Business {
     private String skill;
     private ArrayList<Person> associates;
     private ArrayList<Caporegime> caporegimes;
+    private int policeIntervention;
 
     public Business(int profit, String name, String skill, ArrayList<String> names, ArrayList<String> lastNonItalianName, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
         this.baseProfit = profit;
@@ -17,9 +18,15 @@ public class Business {
         while(amtOfAssociates-- > 0){
             this.associates.add(new Person(names, lastItalianName, lastNonItalianName, personIds));
         }
+
+        this.policeIntervention = Utils.getRandomNumber(50, 100);
     }
 
-    public int gangsterExploreAll(Gangster gangster){
+    public int gangsterExploreAll(Gangster gangster, int policeCost){
+        if(policeIntervention - policeCost/10 > 30){
+            System.out.println(gangster.getName() + " was catched by the police!");
+            return 1;
+        }
         if(this.skill == "loyalty"){
             return (gangster.getLoyalty()/100 + 1)*baseProfit;
         }else if(this.skill == "muscle"){

@@ -9,6 +9,8 @@ public class Family {
     private ArrayList<Caporegime> caporegimes;
     private int wealth;
 
+    private int policeCost;
+
     /**
      * Constructor method
      * @param metadata
@@ -29,6 +31,8 @@ public class Family {
             Caporegime caporegime = new Caporegime(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
             this.caporegimes.add(caporegime);
         }
+
+        this.policeCost = Utils.getRandomNumber(200,500);
         
     }
 
@@ -141,5 +145,13 @@ public class Family {
 
     public void setWealth(int wealth){
         this.wealth = wealth;
+    }
+
+    public int getPoliceCost() {
+        return policeCost;
+    }
+
+    public void setPoliceCost(int policeCost) {
+        this.policeCost = policeCost;
     }
 }
