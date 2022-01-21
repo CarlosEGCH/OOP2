@@ -41,6 +41,41 @@ public class Business {
         return 1;
     }
 
+    public int soldiersExplore(ArrayList<Soldier> soldiers){
+
+        if(this.skill == "intelligence"){ //Calculate maximum intelligence
+            int max = 0;
+            for(Soldier soldier: soldiers){
+                if(soldier.getIntelligence() >= max){
+                    max = soldier.getIntelligence();
+                }
+                return (max/100 + 1)*baseProfit;
+            }
+        }
+
+        if(this.skill == "muscle"){
+            int sum = 0;
+            for(Soldier soldier: soldiers){
+                sum += soldier.getMuscle();
+            }
+            return (sum/soldiers.size()/100 + 1)*baseProfit;
+        }
+
+        if(this.skill == "strategist"){
+            //Do something
+        }
+
+        if(this.skill == "charism"){
+            //Do something
+        }
+
+        if(this.skill == "loyalty"){
+            //Do something
+        }
+        
+        return 1;
+    }
+
     public void showBusinessName(){
         System.out.println(this.name);
     }

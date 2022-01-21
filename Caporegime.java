@@ -23,7 +23,6 @@ public class Caporegime extends Gangster{
         for(Business business: businesses){
             int wealth = family.getWealth();
             family.setWealth(wealth +  business.gangsterExploreAll(this, family.getPoliceCost()));
-            System.out.println("gangsterExploreAll(): "+business.gangsterExploreAll(this, family.getPoliceCost())+"\n");
             
             for(Soldier soldier: soldiers){
             wealth = family.getWealth();
