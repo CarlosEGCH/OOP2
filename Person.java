@@ -13,6 +13,8 @@ public class Person {
     private int strategist;
     private int charism;
 
+    private boolean isInJail;
+
     private int cost;
 
     /**
@@ -269,4 +271,11 @@ public class Person {
         return this.cost;
     }
     
+    public boolean isPrisoner(){
+        return this.isInJail;
+    }
+
+    public void setPrisonerState(boolean state){
+        this.isInJail = state;
+    }
 }

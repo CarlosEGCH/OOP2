@@ -124,6 +124,21 @@ public class Family {
         }
     }
 
+    public void loyaltyTest(ArrayList<Person> jail){
+        for(Caporegime capo: caporegimes){
+            for(Soldier soldier: capo.getSoldiers()){
+                if(Utils.getRandomNumber(soldier.getLoyalty()) < 20 && !soldier.isPrisoner()){
+                    System.out.println("\nThe soldier "+soldier.getName() + " " + soldier.getFamilyName()+" has been put in jail.\n");
+                    soldier.setPrisonerState(true);
+                }
+            }
+            if(Utils.getRandomNumber(capo.getLoyalty()) < 20 && !capo.isPrisoner()){
+                System.out.println("\nThe Caporegime "+capo.getName() + " " + capo.getFamilyName()+" has been put in jail.\n");
+                capo.setPrisonerState(true);
+            }
+        }
+    }
+
     public Caporegime getCaporegime(int index){
         return this.caporegimes.get(index);
     }

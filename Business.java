@@ -24,7 +24,10 @@ public class Business {
         this.ownership = "none";
     }
 
-    public int gangsterExploreAll(Gangster gangster, int policeCost){
+    public int caporegimeExploreAll(Gangster gangster, int policeCost){
+        if(gangster.isPrisoner()){
+            return 1;
+        }
         if(policeIntervention - policeCost/10 > 30){
             System.out.println(gangster.getName() + " was catched by the police!");
             return 1;
@@ -48,7 +51,7 @@ public class Business {
         if(this.skill == "intelligence"){ //Calculate maximum intelligence
             int max = 0;
             for(Soldier soldier: soldiers){
-                if(soldier.getIntelligence() >= max){
+                if(soldier.getIntelligence() >= max && !soldier.isPrisoner()){
                     max = soldier.getIntelligence() - soldier.getCost()/20;
                 }
                 return (max/100 + 1)*baseProfit;
@@ -58,7 +61,9 @@ public class Business {
         if(this.skill == "muscle"){
             int sum = 0;
             for(Soldier soldier: soldiers){
-                sum += soldier.getMuscle() - soldier.getCost()/20;
+                if(!soldier.isPrisoner()){
+                    sum += soldier.getMuscle() - soldier.getCost()/20;
+                }
             }
             return (sum/soldiers.size()/100 + 1)*baseProfit;
         }
@@ -66,7 +71,7 @@ public class Business {
         if(this.skill == "strategist"){
             int max = 0;
             for(Soldier soldier: soldiers){
-                if(soldier.getStrategist() >= max){
+                if(soldier.getStrategist() >= max && !soldier.isPrisoner()){
                     max = soldier.getStrategist() - soldier.getCost()/20;
                 }
                 return (max/100 + 1)*baseProfit;
@@ -76,7 +81,7 @@ public class Business {
         if(this.skill == "charism"){
             int max = 0;
             for(Soldier soldier: soldiers){
-                if(soldier.getCharism() >= max){
+                if(soldier.getCharism() >= max && !soldier.isPrisoner()){
                     max = soldier.getCharism() - soldier.getCost()/20;
                 }
                 return (max/100 + 1)*baseProfit;
@@ -86,7 +91,7 @@ public class Business {
         if(this.skill == "loyalty"){
             int max = 0;
             for(Soldier soldier: soldiers){
-                if(soldier.getLoyalty() >= max){
+                if(soldier.getLoyalty() >= max && !soldier.isPrisoner()){
                     max = soldier.getLoyalty() - soldier.getCost()/20;
                 }
                 return (max/100 + 1)*baseProfit;
