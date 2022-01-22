@@ -19,9 +19,13 @@ public class Consiglieri extends Person{
             
             for(Caporegime capo: family.getCaporegimes()){
                 if(capo.getPersonId() == option){
+                    if(capo.getBusinesses().isEmpty()){
+                        System.out.println("\nThis Caporegime doesn't have any businesses\n");
+                    }
                     int random = Utils.getRandomNumber(capo.getBusinesses().size() - 1);
                     System.out.println("The profit of the business "+capo.getBusinesses().get(random).getName()+" increased to "+capo.getBusinesses().get(random).getBaseProfit()*((double)family.getConsiglieri().getStrategist()/100 + 1));
-                    capo.getBusinesses().get(random).setBaseProfit(capo.getBusinesses().get(random).getBaseProfit()*(int)((double)family.getConsiglieri().getStrategist()/100 + 1));
+                    capo.getBusinesses().get(random).setBaseProfit(capo.getBusinesses().get(random).getBaseProfit() + capo.getBusinesses().get(random).getBaseProfit()*(int)((double)family.getConsiglieri().getStrategist()/100 + 1));
+                    return;
                 }
             }
             if(option == 0){

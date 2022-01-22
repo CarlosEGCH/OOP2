@@ -36,7 +36,7 @@ public class Menu {
 
                 if(familyNames.contains(option) && family.isFamily(option)){
 
-                    displayMenu(family, businesses);
+                    displayMenu(family, businesses, families);
                     option = "";
                     break;
 
@@ -60,7 +60,19 @@ public class Menu {
 
     }
 
-    public void displayMenu(Family family, ArrayList<Business> businesses){
+    public void doMafiaSitdown(ArrayList<Family> families){
+        for(Family family: families){
+            family.mafiaSitdown();
+        }
+    }
+
+    public void doAllOutWar(ArrayList<Family> families){
+        for(Family family: families){
+            family.allOutWar();
+        }
+    }
+
+    public void displayMenu(Family family, ArrayList<Business> businesses, ArrayList<Family> families){
         
         while(true){
             int option = 0;
@@ -83,10 +95,10 @@ public class Menu {
                     displayUnderBossMenu(family, businesses);
                     break;
                 case 3:
-                    displayConsiglieriMenu(family);
+                    displayConsiglieriMenu(family, families);
                     break;
                 case 4:
-                    displayFamilyMenu(family);
+                    displayFamilyMenu(family, families);
                     break;
                 case 5:
                     System.out.println("\n\u001B[31mGoing back\n\u001B[0m");
@@ -98,7 +110,7 @@ public class Menu {
             }
             }catch(Exception e){
                 System.out.println("You must insert a number ");
-                displayMenu(family, businesses);
+                displayMenu(family, businesses, families);
             }
         }
     }
@@ -168,10 +180,7 @@ public class Menu {
                 family.releaseGangster();
                 break;
             case 2:
-                for(Caporegime capo: family.getCaporegimes()){
-                    capo.exploration(family);
-                    System.out.println("\n\u001B[42m\u001B[30mBusiness explored successfully by Caporegime "+capo.getName() + " "+ capo.getFamilyName() +"\n\u001B[0m\u001B[0m");
-                }
+                family.getUnderboss().accountingPeriod(family);
                 break;
             case 3:
                 family.loyaltyTest();
@@ -190,7 +199,7 @@ public class Menu {
 
     }
 
-    public void displayConsiglieriMenu(Family family){
+    public void displayConsiglieriMenu(Family family, ArrayList<Family> families){
         System.out.println("\u001B[36mMain Menu of the Consiglieri " + family.getFamilyName() + "\n\u001B[0m");
         System.out.println("1. Expand Business\n");
         System.out.println("2. Mafia Sitdown\n");
@@ -206,7 +215,7 @@ public class Menu {
                 family.getConsiglieri().expandBusiness(family);
                 break;
             case 2:
-                //Mafia Sitdown
+                doMafiaSitdown(families);
                 break;
             case 3:
                 return;
@@ -216,12 +225,12 @@ public class Menu {
         }
         }catch(Exception e){
             System.out.println("You must enter a number ");
-            displayConsiglieriMenu(family);
+            displayConsiglieriMenu(family, families);
         }
 
     }
     
-    public void displayFamilyMenu(Family family){
+    public void displayFamilyMenu(Family family, ArrayList<Family> families){
         System.out.println("\u001B[36mMain Menu of the family " + family.getFamilyName() + "\n\u001B[0m");
         System.out.println("1. Family Photo\n");
         System.out.println("2. Business Plan\n");
@@ -260,7 +269,7 @@ public class Menu {
                 family.showJail();
                 break;
             case 7:
-                //All Out War
+                doAllOutWar(families);
                 break;
             case 8:
                 return;
@@ -270,7 +279,7 @@ public class Menu {
         }
         }catch(Exception e){
             System.out.println("You must enter a number");
-            displayFamilyMenu(family);
+            displayFamilyMenu(family, families);
         }
 
     }

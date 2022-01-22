@@ -202,4 +202,7 @@ public class Business {
         this.baseProfit = profit;
     }
 
+    public int getPoliceIntervention(){
+        return this.policeIntervention;
+    }
 }

@@ -26,6 +26,12 @@ public class Caporegime extends Gangster{
             for(Person associate: business.getAssociates()){
                 associatesCosts += associate.getCost();
             }
+
+            if(Utils.getRandomNumber(business.getPoliceIntervention() - family.getPoliceCost()/10) > 30 && !family.getBoss().isPrisoner()){
+                System.out.println("\nThe boss of the family "+family.getFamilyName()+" was caught!.\n");
+                family.getJail().add(family.getBoss());
+            }
+
             family.setWealth(wealth +  business.caporegimeExploreAll(family, this, family.getPoliceCost()) - associatesCosts - family.getInformantCosts());
             
             business.soldiersExplore(family, soldiers, family.getPoliceCost());

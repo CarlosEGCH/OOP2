@@ -272,11 +272,14 @@ public class Family {
             Scanner sc = new Scanner(System.in);
             int option = sc.nextInt();
             for(Person person: jail){
-                if(person.getPersonId() == option){
+                if(person.getPersonId() == option && this.wealth > 200){
                     System.out.println("\n\u001B[32m"+person.getName() + " " + person.getFamilyName()+" has been released!\u001B[0m\n");
                     person.setPrisonerState(false);
                     jail.remove(person);
+                    this.wealth-= Utils.getRandomNumber(100, 200);
                     return;
+                }else if(this.wealth <= 200){
+                    System.out.println("\nNot enough money to pay for the gangster's release.\n");
                 }
             }
             if(option == 0){
@@ -286,6 +289,20 @@ public class Family {
 
             System.out.println("Please select a valid option.");
         }
+    }
+
+    public void mafiaSitdown(){
+        if(this.policeCost > 80){
+            setPoliceCost(getPoliceCost() - Utils.getRandomNumber(20, 80));
+            System.out.println("\nThe police cost of the family "+this.getFamilyName()+" has been lowered to "+getPoliceCost()+"\n");
+        }else{
+            System.out.println("\nThe cost of the family "+this.getFamilyName()+" can't be lowered more!\n");
+        }
+    }
+
+    public void allOutWar(){
+        setPoliceCost(getPoliceCost() + Utils.getRandomNumber(50, 200));
+        System.out.println("\nThe police cost of the family "+this.getFamilyName()+" has been increased to "+getPoliceCost()+"\n");
     }
 
     public Caporegime getCaporegime(int index){

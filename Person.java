@@ -293,4 +293,8 @@ public class Person {
     public void setInformant(boolean isInformant) {
         this.isInformant = isInformant;
     }
+
+    public void setCost(int cost){
+        this.cost = cost;
+    }
 }

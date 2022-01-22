@@ -64,6 +64,8 @@ class MafiaCity {
         newBusinesses.add(new Business(2000, "Stealing", "intelligence", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
         newBusinesses.add(new Business(4500, "Extortion", "charism", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
         newBusinesses.add(new Business(3200, "Black Market", "strategist", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
+        newBusinesses.add(new Business(1800, "Security", "muscle", false, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
+
 
         businesses = newBusinesses;
     }
