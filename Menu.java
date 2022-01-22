@@ -254,7 +254,7 @@ public class Menu {
                 //Team Spirit
                 break;
             case 5:
-                //Obituary
+                family.showObituary();
                 break;
             case 6:
                 family.showJail();

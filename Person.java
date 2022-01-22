@@ -14,6 +14,7 @@ public class Person {
     private int charism;
 
     private boolean isInJail;
+    private boolean isInformant;
 
     private int cost;
 
@@ -58,6 +59,7 @@ public class Person {
         this.intelligence = Utils.getRandomNumber(100);
         this.strategist = Utils.getRandomNumber(100);
         this.charism = Utils.getRandomNumber(100);
+        this.isInformant = false;
 
         if(this.behaviour <= 50){
             this.cost = Utils.getRandomNumber(100,300);
@@ -96,6 +98,11 @@ public class Person {
         this.intelligence = Utils.getRandomNumber(100);
         this.strategist = Utils.getRandomNumber(100);
         this.charism = Utils.getRandomNumber(100);
+        this.isInformant = false;
+
+        if(this.behaviour <= 50){
+            this.cost = Utils.getRandomNumber(100,300);
+        }
     }
 
 
@@ -207,7 +214,7 @@ public class Person {
 
         while(index-- > 0){
             if(citizens.get(index).getLineage() && citizens.get(index).getLoyalty() > 80){
-                family.getUnderbosses().add(citizens.get(index).becomeGangster(citizens));
+                family.setUnderboss(citizens.get(index).becomeGangster(citizens));
                 return;
             }
         }
@@ -277,5 +284,13 @@ public class Person {
 
     public void setPrisonerState(boolean state){
         this.isInJail = state;
+    }
+
+    public boolean isInformant() {
+        return isInformant;
+    }
+
+    public void setInformant(boolean isInformant) {
+        this.isInformant = isInformant;
     }
 }

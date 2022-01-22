@@ -4,9 +4,10 @@ import java.util.Scanner;
 public class Family {
     
     private Gangster boss;
-    private ArrayList<Gangster> underbosses;
-    private ArrayList<Consiglieri> consiglieries;
+    private Gangster underboss;
+    private Consiglieri consiglieri;
     private ArrayList<Caporegime> caporegimes;
+    private ArrayList<Person> obituary;
     private int wealth;
     
     private ArrayList<Person> jail;
@@ -18,16 +19,15 @@ public class Family {
      * @param metadata
      */
     public Family(Metadata metadata){
+        this.obituary = new ArrayList<Person>();
         this.caporegimes = new ArrayList<Caporegime>();
-        this.underbosses = new ArrayList<Gangster>();
-        this.consiglieries = new ArrayList<Consiglieri>();
+        this.underboss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
+        this.consiglieri = new Consiglieri(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds());
         this.jail = new ArrayList<Person>();
 
         this.boss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
         Gangster underboss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
-        this.underbosses.add(underboss);
         Consiglieri consiglieri = new Consiglieri(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds());
-        this.consiglieries.add(consiglieri);
 
         int index = Utils.getRandomNumber(2, 4);
         while(index-- > 0){
@@ -50,15 +50,13 @@ public class Family {
     }
 
     public void showUnderBosses(){
-        System.out.println("\n\u001B[35m--------------------------- UnderBosses ----------------------------\u001B[0m\n");
-        this.underbosses.forEach((n) -> System.out.println(n.stringify()));
+        System.out.println("\n\u001B[35m--------------------------- UnderBoss ----------------------------\u001B[0m\n");
+        System.out.println(this.underboss.stringify());
     }
     
     public void showConsiglieries(){
-        System.out.println("\n\u001B[32m--------------------------- Consiglieries ----------------------------\u001B[0m\n");
-        for(Consiglieri c: getConsiglieries()){
-            System.out.println("\n"+c.stringify()+"\n");
-        }
+        System.out.println("\n\u001B[32m--------------------------- Consiglieri ----------------------------\u001B[0m\n");
+        System.out.println(this.consiglieri.stringify());
     }
 
     public void showBusinesses(){
@@ -88,7 +86,7 @@ public class Family {
                 for(Business b: c.getBusinesses()){
                     for(Person a:b.getAssociates()){
                         if(option == a.getPersonId()){
-                            this.getConsiglieries().add(a.becomeConsiglieri(citizens));
+                            this.consiglieri = a.becomeConsiglieri(citizens);
                             System.out.println("\n\u001B[46m\u001B[30m"+a.getName() + " " + a.getFamilyName()+" was nominated as Consiglieri\u001B[30m\u001B[0m\n");
                             b.getAssociates().remove(a);
                             return;
@@ -173,17 +171,24 @@ public class Family {
     public void loyaltyTest(){
         for(Caporegime capo: caporegimes){
             for(Soldier soldier: capo.getSoldiers()){
-                if(Utils.getRandomNumber(soldier.getLoyalty()) < 20 && !soldier.isPrisoner()){
-                    System.out.println("\nThe soldier "+soldier.getName() + " " + soldier.getFamilyName()+" has been put in jail.\n");
-                    soldier.setPrisonerState(true);
-                    jail.add(soldier);
+                if(Utils.getRandomNumber(soldier.getLoyalty()) < 10 && !soldier.isPrisoner()){
+                    System.out.println("\nThe soldier "+soldier.getName() + " " + soldier.getFamilyName()+" wasn't on his lucky day.\n");
+                    this.obituary.add(soldier);
+                    capo.getSoldiers().remove(soldier);
                 }
             }
-            if(Utils.getRandomNumber(capo.getLoyalty()) < 20 && !capo.isPrisoner()){
-                System.out.println("\nThe Caporegime "+capo.getName() + " " + capo.getFamilyName()+" has been put in jail.\n");
-                capo.setPrisonerState(true);
-                jail.add(capo);
+            if(Utils.getRandomNumber(capo.getLoyalty()) < 10 && !capo.isPrisoner()){
+                System.out.println("\nThe Caporegime "+capo.getName() + " " + capo.getFamilyName()+" was found guilty.\n");
+                this.obituary.add(capo);
+                this.caporegimes.remove(capo);
             }
+        }
+    }
+
+    public void showObituary(){
+        System.out.println("\n\u001B[42m\u001B[30m-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|OBITUARY|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|\n\u001B[0m\u001B[0m");
+        for(Person person: obituary){
+            System.out.println(person.stringify());
         }
     }
 
@@ -202,12 +207,16 @@ public class Family {
         return this.caporegimes.size();
     }
 
-    public ArrayList<Consiglieri> getConsiglieries(){
-        return this.consiglieries;
+    public Consiglieri getConsiglieri(){
+        return this.consiglieri;
     }
 
-    public ArrayList<Gangster> getUnderbosses(){
-        return this.underbosses;
+    public Gangster getUnderboss(){
+        return this.underboss;
+    }
+
+    public void setUnderboss(Gangster underboss){
+        this.underboss = underboss;
     }
 
     public String getFamilyName(){
