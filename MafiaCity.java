@@ -62,9 +62,9 @@ class MafiaCity {
     public static void generateBusinesses(){
         ArrayList<Business> newBusinesses = new ArrayList<Business>();
 
-        newBusinesses.add(new Business(200, "Stealing", "intelligence", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
-        newBusinesses.add(new Business(450, "Extortion", "charism", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
-        newBusinesses.add(new Business(300, "Black Market", "strategist", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
+        newBusinesses.add(new Business(2000, "Stealing", "intelligence", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
+        newBusinesses.add(new Business(4500, "Extortion", "charism", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
+        newBusinesses.add(new Business(3200, "Black Market", "strategist", true, metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getFileNonItalianLastNames(), metadata.getPersonIds()));
 
         businesses = newBusinesses;
     }

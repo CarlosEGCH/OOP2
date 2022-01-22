@@ -27,7 +27,7 @@ public class Business {
     }
 
     //We need to check if the business is illegal or not before doing the intervention. F.ex. with an attribute boolean isIllegal
-    public int caporegimeExploreAll(Gangster gangster, int policeCost){
+    public int caporegimeExploreAll(Family family, Gangster gangster, int policeCost){
 
         //If caporegime is in jail, nothing happens
         if(gangster.isPrisoner()){
@@ -37,20 +37,22 @@ public class Business {
         //If the chance of the police acting occurs and the business is illegal, police acts
         if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
             System.out.println(gangster.getName() + " was catched by the police!");
+            gangster.setPrisonerState(true);
+            family.getJail().add(gangster);
             return 1;
         }
 
         //Else, the business is explored
         if(this.skill == "loyalty"){
-            return (gangster.getLoyalty()/100 + 1)*baseProfit;
+            return (int)(double)((double) gangster.getLoyalty()/100 + 1)*baseProfit;
         }else if(this.skill == "muscle"){
-            return (gangster.getMuscle()/100 + 1)*baseProfit;
+            return (int)((double)gangster.getMuscle()/100 + 1)*baseProfit;
         }else if(this.skill == "intelligence"){
-            return (gangster.getIntelligence()/100 + 1)*baseProfit;
+            return (int)((double)gangster.getIntelligence()/100 + 1)*baseProfit;
         }else if(this.skill == "strategist"){
-            return (gangster.getStrategist()/100 + 1)*baseProfit;
+            return (int)((double)gangster.getStrategist()/100 + 1)*baseProfit;
         }else if(this.skill == "charism"){
-            return (gangster.getCharism()/100 + 1)*baseProfit;
+            return (int)((double)gangster.getCharism()/100 + 1)*baseProfit;
         }
         return 1;
     }

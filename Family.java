@@ -241,4 +241,8 @@ public class Family {
     public void setPoliceCost(int policeCost) {
         this.policeCost = policeCost;
     }
+
+    public ArrayList<Person> getJail(){
+        return this.jail;
+    }
 }
