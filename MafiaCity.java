@@ -38,7 +38,7 @@ class MafiaCity {
      * Display the program's menu
      */
     public static void displayMenu(){
-        menu = new Menu(citizens, families, jail);
+        menu = new Menu(citizens);
         menu.displayFamiliesMenu(families, businesses);
     }
 

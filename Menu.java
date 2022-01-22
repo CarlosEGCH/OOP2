@@ -6,14 +6,10 @@ import java.util.Scanner;
 public class Menu {
 
     private ArrayList<Person> citizens;
-    private ArrayList<Family> families;
-    private ArrayList<Person> jail;
     
-    public Menu(ArrayList<Person> citizens, ArrayList<Family> families, ArrayList<Person> jail){
+    public Menu(ArrayList<Person> citizens){
 
         this.citizens = citizens;
-        this.families = families;
-        this.jail = jail;
     } 
 
     public void displayFamiliesMenu(ArrayList<Family> families, ArrayList<Business> businesses){
@@ -179,7 +175,8 @@ public class Menu {
                 }
                 break;
             case 3:
-                //Loyalty Test
+                family.loyaltyTest();
+                System.out.println("\n\u001B[42m\u001B[30mLoyalty test has been performed\n\u001B[0m\u001B[0m");
                 break;
             case 4:
                 return;
@@ -261,7 +258,7 @@ public class Menu {
                 //Obituary
                 break;
             case 6:
-                //Jailed
+                family.showJail();
                 break;
             case 7:
                 //All Out War

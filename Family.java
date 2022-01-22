@@ -8,6 +8,8 @@ public class Family {
     private ArrayList<Consiglieri> consiglieries;
     private ArrayList<Caporegime> caporegimes;
     private int wealth;
+    
+    private ArrayList<Person> jail;
 
     private int policeCost;
 
@@ -19,6 +21,7 @@ public class Family {
         this.caporegimes = new ArrayList<Caporegime>();
         this.underbosses = new ArrayList<Gangster>();
         this.consiglieries = new ArrayList<Consiglieri>();
+        this.jail = new ArrayList<Person>();
 
         this.boss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
         Gangster underboss = new Gangster(metadata.getFileNames(), metadata.getFileItalianLastNames(), metadata.getPersonIds());
@@ -124,18 +127,27 @@ public class Family {
         }
     }
 
-    public void loyaltyTest(ArrayList<Person> jail){
+    public void loyaltyTest(){
         for(Caporegime capo: caporegimes){
             for(Soldier soldier: capo.getSoldiers()){
                 if(Utils.getRandomNumber(soldier.getLoyalty()) < 20 && !soldier.isPrisoner()){
                     System.out.println("\nThe soldier "+soldier.getName() + " " + soldier.getFamilyName()+" has been put in jail.\n");
                     soldier.setPrisonerState(true);
+                    jail.add(soldier);
                 }
             }
             if(Utils.getRandomNumber(capo.getLoyalty()) < 20 && !capo.isPrisoner()){
                 System.out.println("\nThe Caporegime "+capo.getName() + " " + capo.getFamilyName()+" has been put in jail.\n");
                 capo.setPrisonerState(true);
+                jail.add(capo);
             }
+        }
+    }
+
+    public void showJail(){
+        System.out.println("\n\u001B[42m\u001B[30m-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|JAIL|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|\n\u001B[0m\u001B[0m");
+        for(Person person: jail){
+            System.out.println(person.stringify());
         }
     }
 
