@@ -104,7 +104,24 @@ public class Family {
     }
 
     public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
-        caporegime.getBusinesses().add(business);
+        if(business.getOwnership() == "none"){
+            caporegime.getBusinesses().add(business);
+            business.setOwnership("single");
+        }
+        if(business.getOwnership() == "single"){
+            for(Caporegime capo: getCaporegimes()){
+                if(capo.getBusinesses().contains(business)){
+                    caporegime.getBusinesses().add(business);
+                    business.setOwnership(this.getFamilyName());
+                    return;
+                }
+            }
+            caporegime.getBusinesses().add(business);
+            business.setOwnership("shared");
+        }
+        if(business.getOwnership() == "shared"){
+            System.out.println("\nThis business is already shared by Caporegimes of different families, try another one");
+        }
     }
 
     public Caporegime getCaporegime(int index){

@@ -264,5 +264,9 @@ public class Person {
     public void setPersonId(int personId) {
         this.personId = personId;
     }
+
+    public int getCost(){
+        return this.cost;
+    }
     
 }

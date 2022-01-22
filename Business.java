@@ -7,6 +7,7 @@ public class Business {
     private ArrayList<Person> associates;
     private ArrayList<Caporegime> caporegimes;
     private int policeIntervention;
+    private String ownership;
 
     public Business(int profit, String name, String skill, ArrayList<String> names, ArrayList<String> lastNonItalianName, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
         this.baseProfit = profit;
@@ -20,6 +21,7 @@ public class Business {
         }
 
         this.policeIntervention = Utils.getRandomNumber(50, 100);
+        this.ownership = "none";
     }
 
     public int gangsterExploreAll(Gangster gangster, int policeCost){
@@ -47,7 +49,7 @@ public class Business {
             int max = 0;
             for(Soldier soldier: soldiers){
                 if(soldier.getIntelligence() >= max){
-                    max = soldier.getIntelligence();
+                    max = soldier.getIntelligence() - soldier.getCost()/20;
                 }
                 return (max/100 + 1)*baseProfit;
             }
@@ -56,21 +58,39 @@ public class Business {
         if(this.skill == "muscle"){
             int sum = 0;
             for(Soldier soldier: soldiers){
-                sum += soldier.getMuscle();
+                sum += soldier.getMuscle() - soldier.getCost()/20;
             }
             return (sum/soldiers.size()/100 + 1)*baseProfit;
         }
 
         if(this.skill == "strategist"){
-            //Do something
+            int max = 0;
+            for(Soldier soldier: soldiers){
+                if(soldier.getStrategist() >= max){
+                    max = soldier.getStrategist() - soldier.getCost()/20;
+                }
+                return (max/100 + 1)*baseProfit;
+            }
         }
 
         if(this.skill == "charism"){
-            //Do something
+            int max = 0;
+            for(Soldier soldier: soldiers){
+                if(soldier.getCharism() >= max){
+                    max = soldier.getCharism() - soldier.getCost()/20;
+                }
+                return (max/100 + 1)*baseProfit;
+            }
         }
 
         if(this.skill == "loyalty"){
-            //Do something
+            int max = 0;
+            for(Soldier soldier: soldiers){
+                if(soldier.getLoyalty() >= max){
+                    max = soldier.getLoyalty() - soldier.getCost()/20;
+                }
+                return (max/100 + 1)*baseProfit;
+            }
         }
         
         return 1;
@@ -115,8 +135,13 @@ public class Business {
     }
 
     
-    /*
-    * TODO: Improve business exploration methods to make them more diverse.
-    */
+    public String getOwnership() {
+        return ownership;
+    }
+
+    public void setOwnership(String ownership) {
+        this.ownership = ownership;
+    }
+    
 
 }
