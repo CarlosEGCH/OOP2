@@ -107,6 +107,18 @@ public class Family {
     }
 
     public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
+
+        if(business.getOwnership() == getFamilyName()){
+            for(Caporegime capo: getCaporegimes()){
+                if(capo.getBusinesses().contains(business)){
+                    continue;
+                }
+                capo.getBusinesses().add(business);
+                System.out.println("\n\u001B[42m\u001B[30mBusiness "+ business.getName() +" generated successfully for Caporegime\n\u001B[0m\u001B[0m");
+                return;
+            }
+        }
+
         if(business.getOwnership() == "none"){
             caporegime.getBusinesses().add(business);
             System.out.println("\n\u001B[42m\u001B[30mBusiness "+ business.getName() +" generated successfully for Caporegime\n\u001B[0m\u001B[0m");
@@ -128,15 +140,16 @@ public class Family {
                 for(Caporegime capo: getCaporegimes()){
                     int amt = 0;
                     if(capo.getBusinesses().contains(business)){
-                        amt++;
+                        if(amt == getCaporegimes().size() - 1){
+                            System.out.println("\n\u001B[42m\u001B[30mBusiness can't be generated for any Caporegime, try again\n\u001B[0m\u001B[0m");
+                            return;
+                            }
+                            amt++;
                         continue;
                     }
-                    if(amt == getCaporegimes().size() - 1){
-                    System.out.println("\n\u001B[42m\u001B[30mBusiness can't be generated for any Caporegime, try again\n\u001B[0m\u001B[0m");
-                    return;
-                    }
+                    
                     capo.getBusinesses().add(business);
-                    business.setOwnership(capo.getFamilyName());
+                    business.setOwnership(getFamilyName());
                     System.out.println("\n\u001B[42m\u001B[30mBusiness "+ business.getName() +" generated successfully for Caporegime\n\u001B[0m\u001B[0m");
                     return;
                 }
@@ -148,22 +161,13 @@ public class Family {
             return;
         }
 
-        if(business.getOwnership() == getFamilyName()){
-            for(Caporegime capo: getCaporegimes()){
-                if(capo == caporegime){
-                    continue;
-                }
-                capo.getBusinesses().add(business);
-                return;
-            }
-        }
 
         if(business.getOwnership() == "shared"){
             System.out.println("\nThis business is already shared by Caporegimes of different families, try another one");
             return;
         }
 
-        System.out.println("\nThis business is already shared by Caporegimes of another family.");
+        System.out.println("\nThis business is already shared by Caporegimes of a whole family.\n");
     }
 
     public void loyaltyTest(){
