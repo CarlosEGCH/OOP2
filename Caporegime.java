@@ -22,7 +22,11 @@ public class Caporegime extends Gangster{
         }
         for(Business business: businesses){
             int wealth = family.getWealth();
-            family.setWealth(wealth +  business.gangsterExploreAll(this, family.getPoliceCost()));
+            int associatesCosts = 0;
+            for(Person associate: business.getAssociates()){
+                associatesCosts += associate.getCost();
+            }
+            family.setWealth(wealth +  business.gangsterExploreAll(this, family.getPoliceCost()) - associatesCosts);
             
             business.soldiersExplore(soldiers);
         }
