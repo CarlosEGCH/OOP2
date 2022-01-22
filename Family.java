@@ -104,6 +104,21 @@ public class Family {
         }
     }
 
+    public int getInformantCosts(){
+        int costs = 0;
+        for(Caporegime capo: caporegimes){
+            for(Soldier soldier: capo.getSoldiers()){
+                if(soldier.isInformant()){
+                    costs += 20;
+                }
+            }
+            if(capo.isInformant()){
+                costs += 40;
+            }
+        }
+        return costs;
+    }
+
     public void generateBusinessesForCaporegime(Caporegime caporegime, Business business){
 
         if(business.getOwnership() == getFamilyName()){
@@ -199,6 +214,80 @@ public class Family {
         }
     }
 
+    public void teamSpirit(){
+        while(true){
+        System.out.println("\n\u001B[32m--------------------------- Caporegimes ----------------------------\u001B[0m\n");
+            for(Caporegime capo: caporegimes){
+                System.out.println(capo.stringify());
+            }
+        System.out.println("\n\u001B[32mSelect a Caporegime by it's ccID, or type 0 to Exit this menu\u001B[0m\n");
+        Scanner sc = new Scanner(System.in);
+        int option = sc.nextInt();
+        if(option == 0){
+            System.out.println("Leaving menu");
+            return;
+        }
+        for(Caporegime capo: this.caporegimes){
+            if(capo.getPersonId() == option){
+                System.out.println("\n\u001B[32m--------------------------- Soldiers of Caporegime "+capo.getName() + " " + capo.getFamilyName()+" ----------------------------\u001B[0m\n");
+                for(Soldier soldier: capo.getSoldiers()){
+                    System.out.println(soldier.stringify());
+                }
+                return;
+            }
+        }
+        System.out.println("\nYou must select a valid option! Try again.\n");
+        }
+    }
+
+    public void costsMap(){
+        int total = 0;
+        System.out.println("\n\u001B[32m--------------------------- Costs for family "+this.getFamilyName()+" ----------------------------\u001B[0m\n");
+        System.out.println("\nMain family cost for the police: $"+this.policeCost+"\n");
+        total += this.policeCost;
+        for(Caporegime capo: this.caporegimes){
+            System.out.println("\nCost for Caporegime "+capo.getName() + " " + capo.getFamilyName()+": $"+capo.getCost()+"\n");
+            total += capo.getCost();
+            for(Soldier soldier: capo.getSoldiers()){
+                System.out.println("\nCost for Soldier "+soldier.getName() + " " + soldier.getFamilyName()+": $"+soldier.getCost()+"\n");
+                total += soldier.getCost();
+            }
+            System.out.println("\nCosts of businesses owned by Caporegime "+capo.getName() + " "+capo.getFamilyName()+"\n");
+            for(Business business: capo.getBusinesses()){
+                for(Person associate: business.getAssociates()){
+                System.out.println("\nCost of Associate "+associate.getName() + " "+associate.getFamilyName()+" owned by Caporegime "+capo.getName() + " "+capo.getFamilyName()+": $"+associate.getCost()+"\n");
+                total += associate.getCost();
+                }
+            }
+        }
+        System.out.println("\nTotal Family Costs: $"+total+"\n");
+    }
+
+    public void releaseGangster(){
+        while(true){
+            System.out.println("\n\u001B[32mSelect a gangster to release (select by ccID) or type 0 to Exit this menu: \u001B[0m\n");
+            for(Person person: jail){
+                System.out.println(person.stringify());
+            }
+            Scanner sc = new Scanner(System.in);
+            int option = sc.nextInt();
+            for(Person person: jail){
+                if(person.getPersonId() == option){
+                    System.out.println("\n\u001B[32m"+person.getName() + " " + person.getFamilyName()+" has been released!\u001B[0m\n");
+                    person.setPrisonerState(false);
+                    jail.remove(person);
+                    return;
+                }
+            }
+            if(option == 0){
+                System.out.println("\nLeaving current menu\n");
+                return;
+            }
+
+            System.out.println("Please select a valid option.");
+        }
+    }
+
     public Caporegime getCaporegime(int index){
         return this.caporegimes.get(index);
     }
@@ -220,7 +309,7 @@ public class Family {
     }
 
     public String getFamilyName(){
-        return this.boss.getName();
+        return this.boss.getFamilyName();
     }
 
     public boolean isFamily(String familyName){

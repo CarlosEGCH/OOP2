@@ -153,7 +153,7 @@ public class Menu {
 
     public void displayUnderBossMenu(Family family, ArrayList<Business> businesses){
         System.out.println("\u001B[36mMain Menu of the UnderBoss " + family.getFamilyName() + "\n\u001B[0m");
-        System.out.println("1. Free Gangster\n");
+        System.out.println("1. Release Gangster\n");
         System.out.println("2. Business Exploration\n");
         System.out.println("3. Loyalty Test\n");
         System.out.println("4. Exit Menu\n");
@@ -165,7 +165,7 @@ public class Menu {
 
         switch(option){
             case 1:
-                //Free Gangster
+                family.releaseGangster();
                 break;
             case 2:
                 for(Caporegime capo: family.getCaporegimes()){
@@ -203,7 +203,7 @@ public class Menu {
 
         switch(option){
             case 1:
-                //Expand Business
+                family.getConsiglieri().expandBusiness(family);
                 break;
             case 2:
                 //Mafia Sitdown
@@ -248,10 +248,10 @@ public class Menu {
                 family.showBusinesses();
                 break;
             case 3:
-                //Costs Map
+                family.costsMap();
                 break;
             case 4:
-                //Team Spirit
+                family.teamSpirit();
                 break;
             case 5:
                 family.showObituary();

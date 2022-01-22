@@ -193,6 +193,13 @@ public class Business {
     public void setOwnership(String ownership) {
         this.ownership = ownership;
     }
+
+    public int getBaseProfit(){
+        return this.baseProfit;
+    }
     
+    public void setBaseProfit(int profit){
+        this.baseProfit = profit;
+    }
 
 }

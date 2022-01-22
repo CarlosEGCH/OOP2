@@ -6,7 +6,6 @@ class MafiaCity {
     private static ArrayList<Person> citizens;
     private static ArrayList<Family> families;
     private static ArrayList<Business> businesses;
-    private static ArrayList<Person> jail;
     private static Metadata metadata;
     private static Menu menu;
 
