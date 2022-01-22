@@ -24,11 +24,12 @@ public class Business {
         this.ownership = "none";
     }
 
+    //We need to check if the business is illegal or not before doing the intervention. F.ex. with an attribute boolean isIllegal
     public int caporegimeExploreAll(Gangster gangster, int policeCost){
         if(gangster.isPrisoner()){
             return 1;
         }
-        if(policeIntervention - policeCost/10 > 30){
+        if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30){
             System.out.println(gangster.getName() + " was catched by the police!");
             return 1;
         }
