@@ -8,11 +8,13 @@ public class Business {
     private ArrayList<Caporegime> caporegimes;
     private int policeIntervention;
     private String ownership;
+    private boolean isIllegal;
 
-    public Business(int profit, String name, String skill, ArrayList<String> names, ArrayList<String> lastNonItalianName, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
+    public Business(int profit, String name, String skill, boolean isIllegal, ArrayList<String> names, ArrayList<String> lastNonItalianName, ArrayList<String> lastItalianName, ArrayList<Integer> personIds){
         this.baseProfit = profit;
         this.name = name;
         this.skill = skill;
+        this.isIllegal = isIllegal;
         this.associates = new ArrayList<Person>();
 
         int amtOfAssociates = Utils.getRandomNumber(10);
@@ -26,13 +28,19 @@ public class Business {
 
     //We need to check if the business is illegal or not before doing the intervention. F.ex. with an attribute boolean isIllegal
     public int caporegimeExploreAll(Gangster gangster, int policeCost){
+
+        //If caporegime is in jail, nothing happens
         if(gangster.isPrisoner()){
             return 1;
         }
-        if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30){
+
+        //If the chance of the police acting occurs and the business is illegal, police acts
+        if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
             System.out.println(gangster.getName() + " was catched by the police!");
             return 1;
         }
+
+        //Else, the business is explored
         if(this.skill == "loyalty"){
             return (gangster.getLoyalty()/100 + 1)*baseProfit;
         }else if(this.skill == "muscle"){
@@ -47,11 +55,15 @@ public class Business {
         return 1;
     }
 
-    public int soldiersExplore(ArrayList<Soldier> soldiers){
+    public int soldiersExplore(ArrayList<Soldier> soldiers, int policeCost){
 
         if(this.skill == "intelligence"){ //Calculate maximum intelligence
             int max = 0;
             for(Soldier soldier: soldiers){
+                if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
+                    System.out.println(soldier.getName() + " was catched by the police!");
+                    return 1;
+                }
                 if(soldier.getIntelligence() >= max && !soldier.isPrisoner()){
                     max = soldier.getIntelligence() - soldier.getCost()/20;
                 }
@@ -62,6 +74,10 @@ public class Business {
         if(this.skill == "muscle"){
             int sum = 0;
             for(Soldier soldier: soldiers){
+                if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
+                    System.out.println(soldier.getName() + " was catched by the police!");
+                    return 1;
+                }
                 if(!soldier.isPrisoner()){
                     sum += soldier.getMuscle() - soldier.getCost()/20;
                 }
@@ -72,6 +88,10 @@ public class Business {
         if(this.skill == "strategist"){
             int max = 0;
             for(Soldier soldier: soldiers){
+                if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
+                    System.out.println(soldier.getName() + " was catched by the police!");
+                    return 1;
+                }
                 if(soldier.getStrategist() >= max && !soldier.isPrisoner()){
                     max = soldier.getStrategist() - soldier.getCost()/20;
                 }
@@ -82,6 +102,10 @@ public class Business {
         if(this.skill == "charism"){
             int max = 0;
             for(Soldier soldier: soldiers){
+                if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
+                    System.out.println(soldier.getName() + " was catched by the police!");
+                    return 1;
+                }
                 if(soldier.getCharism() >= max && !soldier.isPrisoner()){
                     max = soldier.getCharism() - soldier.getCost()/20;
                 }
@@ -92,6 +116,10 @@ public class Business {
         if(this.skill == "loyalty"){
             int max = 0;
             for(Soldier soldier: soldiers){
+                if(Utils.getRandomNumber(policeIntervention - policeCost/10) > 30 && isIllegal){
+                    System.out.println(soldier.getName() + " was catched by the police!");
+                    return 1;
+                }
                 if(soldier.getLoyalty() >= max && !soldier.isPrisoner()){
                     max = soldier.getLoyalty() - soldier.getCost()/20;
                 }

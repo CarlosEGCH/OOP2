@@ -134,7 +134,6 @@ public class Menu {
                 int randomCapo = Utils.getRandomNumber(family.getCaporegimesAmt() - 1);
                 int randomBusiness = Utils.getRandomNumber(businesses.size() - 1);
                 family.generateBusinessesForCaporegime(family.getCaporegimes().get(Utils.getRandomNumber(randomCapo)), businesses.get(randomBusiness));
-                System.out.println("\n\u001B[42m\u001B[30mBusiness "+ businesses.get(randomBusiness).getName() +" generated successfully for Caporegime\n\u001B[0m\u001B[0m");
                 break;
             case 5:
                 family.nominateConsiglieri(citizens);
